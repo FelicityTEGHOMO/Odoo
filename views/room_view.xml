@@ -2,15 +2,18 @@
 <odoo>
   <data>
 
-    <record id="room_view_list" model="ir.ui.view">
-      <field name="name">Chambres List</field>
+    <record id="room_view_tree" model="ir.ui.view">
+      <field name="name">room.view.tree</field>
       <field name="model">gestion_reservations.room</field>
       <!-- <field name="model">tree</field> -->
       <field name="arch" type="xml">
         <tree string="Rooms list">
-          <field name="id_room" />
+          <field name="id_room"  />
+          <field name="room_number" />
           <field name="room_amount" />
+          <field name="capacity" />
           <field name="room_tel" />
+          <field name="disponible" />
           <field name="types" />
           <field name="id_customer" />
           <field name="id_reservation" />
@@ -30,12 +33,14 @@
                         <group>
                             <group name="name" string="Infos">
                                 <field name="id_room" />
+                                <field name="room_number" />
                                 <field name="room_tel" />
                             </group>
                             <group name="name" string="réservation">
                                 <field name="types" />
+                                <field name="capacity" />
                                 <field name="room_amount" /> 
-                                <field name="Disponible" /> 
+                                <field name="disponible" /> 
                             </group>
                         </group>
                 </form>

@@ -30,7 +30,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="id_customer" />
+                                <field name="id_customer" invivible="1" />
                                 <field name="last_name" />
                                 <field name="first_name" />
                             </group>

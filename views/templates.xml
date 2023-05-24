@@ -1,9 +1,12 @@
 <odoo>
     <data>
 
-            
+      <!-- Template hotels  -->
+
       <template id="template_hotels" name="Liste des hôtels">
           <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
+            <img t-att-src="'/gestions_reservations/static/img'"/>
+
           <t t-if="hotels">
               <div>
                   <table>
@@ -31,6 +34,46 @@
           <t t-if="not hotels">
               <div>
                   <p>Aucun hôtel à afficher pour le moment.</p>
+              </div>
+          </t>
+      </template>
+
+      <!-- Template chambres -->
+
+      <template id="template_chambres" name="Liste des chambres">
+          <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/>
+          <t t-if="chambres">
+              <div>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Numéro de chambre</th>
+                              <th>Prix de la chambre</th>
+                              <th>Téléphone de la chambre</th>
+                              <th>Type de la chambre</th>
+                              <th>
+                                  <t t-if="disponible">Disponible</t>
+                                  <t t-if="not disponible">Indisponible</t>
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="chambres" t-as="chambre">
+                              <tr>
+                                  <td><t t-esc="chambre.room_number"/></td>
+                                  <td><t t-esc="chambre.room_amount"/></td>
+                                  <td><t t-esc="chambre.room_tel"/></td>
+                                  <td><t t-esc="chambre.types"/></td>
+                                  <td><t t-esc="chambre.disponible"/></td>
+                              </tr>
+                          </t>
+                      </tbody>
+                  </table>
+              </div>
+          </t>
+          <t t-if="not chambres">
+              <div>
+                  <p>Aucune chambre à afficher pour le moment.</p>
               </div>
           </t>
       </template>

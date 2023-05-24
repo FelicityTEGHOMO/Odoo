@@ -10,12 +10,13 @@
             <field name="arch" type="xml">
                 <tree string="hotel list">
                     <field name="id_hotel" />
+                    <field name="image" />
                     <field name="name_hotel" />
                     <field name="tel_hotel" />
                     <field name="adresse_hotel" />
                     <field name="ville" />
                     <field name="id_room" />
-                    <field name="hotel_room_count" />
+                    <!-- <field name="hotel_room_count" /> -->
                 </tree>
             </field>
         </record>
@@ -31,6 +32,7 @@
                         <group>
                             <group>
                                 <field name="id_hotel" />
+                                <field name="image" widget="image" options='{"preview_image": true}' />
                                 <field name="name_hotel" />
                                 <field name="adresse_hotel" />  
                                 <field name="tel_hotel" />

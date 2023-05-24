@@ -9,7 +9,7 @@
             <field name="model">gestion_reservations.reservation</field>
             <field name="arch" type="xml">
                 <tree string="Reservations list">
-                <field name="id_reservation" />
+                <field name="id_reservation"  />
                 <field name="first_name" />
                 <field name="last_name" />
                 <field name="email" />
