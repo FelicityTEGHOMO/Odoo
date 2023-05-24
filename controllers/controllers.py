@@ -18,6 +18,7 @@ from odoo.http import request
 #         return "Hello, world"
     
 
+# controller hotel
 
 class HotelController(http.Controller):
     @http.route('/hotels', auth='public', website=True)
@@ -25,6 +26,21 @@ class HotelController(http.Controller):
         hotels = http.request.env['gestion_reservations.hotel'].search([])
         return http.request.render('gestion_reservations.template_hotels', {'hotels': hotels})
 
+# controller chambre
+class ChambreController(http.Controller):
+    @http.route('/chambres', auth='public', website=True)
+    def hotel_list(self, **kw):
+        chambres = http.request.env['gestion_reservations.room'].search([])
+        return http.request.render('gestion_reservations.template_chambres', {'chambres': chambres})
+
+
+
+# controller réserver
+class ReserverController(http.Controller):
+    @http.route('/reserver', auth='public', website=True)
+    def hotel_list(self, **kw):
+        reservations = http.request.env['gestion_reservations.reservation'].search([])
+        return http.request.render('gestion_reservations.template_reservations', {'reservations': reservations})
 
     # @http.route('/gestion_reservation/gestion_reservation/hotels', auth='public')
     # def list(self, **kw):
