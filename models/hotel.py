@@ -12,6 +12,7 @@ class ReservationHotel(models.Model):
     tel_hotel = fields.Char(required=True, string="Téléphone de l'hôtel")
     adresse_hotel = fields.Char(required=True, string="Adresse de l'hôtel")
     ville = fields.Char(required=True, string="Ville de l'hôtel")
+    image = fields.Binary(string='Logo')
     # id_customer = fields.Many2many('gestion_reservations.customer', 'id_hotel', string='Customer')
     id_room = fields.One2many('gestion_reservations.room', 'id_hotel', string='Chambre')
     # room_amount = fields.Integer(required=True, string='Prix de la chambre')
@@ -21,10 +22,10 @@ class ReservationHotel(models.Model):
 
 # Cette méthode retourne le nombre de chambres pour chaque hotel
 
-    def get_hotel_room_count(self):
-        rooms_data = self.env['gestion_reservations.room'].read_group([('id_hotel', 'in', self.ids)], ['id_hotel'], ['id_hotel'])
-        result = dict((data['id_hotel'][0], data['id_hotel_count']) for data in rooms_data)
-        for record in self:
-            record.hotel_room_count = result.get(record.id, 0)
+    # def get_hotel_room_count(self):
+    #     rooms_data = self.env['gestion_reservations.room'].read_group([('id_hotel', 'in', self.ids)], ['id_hotel'], ['id_hotel'])
+    #     result = dict((data['id_hotel'][0], data['id_hotel_count']) for data in rooms_data)
+    #     for record in self:
+    #         record.hotel_room_count = result.get(record.id, 0)
 
-    hotel_room_count = fields.Integer(compute='get_hotel_room_count', string='Nombre de chambres')
+    # hotel_room_count = fields.Integer(compute='get_hotel_room_count', string='Nombre de chambres')
