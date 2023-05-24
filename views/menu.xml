@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  
+
+    <!--  Menu principal -->
+
+    <menuitem
+      id="reservation_menu_root"
+      name="Réservations"
+      sequence="15"/>
+
+    <!-- Menu hotels -->
+
+    <menuitem
+      id="reservation_hotel_list"
+      name="Hôtels"
+      action="hotel_action"
+      parent="reservation_menu_root"
+      sequence="10"/>
+
+
+
+    <!-- Menu  chambres -->
+
+    <menuitem
+      id="room_reservation_menu"
+      name="Chambres"
+      action="room_action"
+      parent="reservation_menu_root"
+      sequence="12"/>
+
+    <!-- Menu  réserver -->
+
+    <menuitem
+      id="reservation_menu"
+      name="Réserver"
+      action="reservation_action"
+      parent="reservation_menu_root"
+      sequence="13"/>
+
+</odoo>

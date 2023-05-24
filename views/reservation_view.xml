@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+    <!-- Vue liste reservation -->
+
+        <record id="room_view_list" model="ir.ui.view">
+            <field name="name">Reservation</field>
+            <field name="model">gestion_reservations.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Reservations list">
+                <field name="id_reservation" />
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="email" />
+                <field name="adresse" />
+                <field name="ville" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="id_customer" />
+                <field name="id_room" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue formulaire reservation -->
+
+        <record id="reservation_view_form" model="ir.ui.view">
+            <field name="name">reservation.view.form</field>
+            <field name="model">gestion_reservations.reservation</field>
+            <field name="arch" type="xml">
+                    <form string="reservation form">
+                        <group>
+                            <group name="name" string="Infos">
+                                <field name="id_reservation" />
+                                <field name="first_name" />
+                                <field name="last_name" />
+                                <field name="email" />
+                            </group>
+                            <group name="name" string="Perso">
+                                <field name="adresse" />
+                                <field name="ville" />
+                                <field name="start_date" />
+                                <field name="end_date" />
+                            </group>
+  
+                                    
+                        </group>
+                    </form>
+            </field>
+
+        </record>
+
+        <!-- Action à effectuer sur la réservation-->
+
+        <record id="reservation_action" model="ir.actions.act_window">
+        <field name="name">Réserver</field>
+        <field name="res_model">gestion_reservations.reservation</field>
+        <field name="view_mode">tree,form</field>
+        </record>
+    
+    </data>
+    
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <!-- Vue liste des clients -->
+
+        <record id="customer_view_tree" model="ir.ui.view">
+            <field name="name">customer.list.tree</field>
+            <field name="model">gestion_reservations.customer</field>
+            <field name="arch" type="xml">
+                <tree string="Client list">
+                    <field name="id_customer" />
+                    <field name="last_name" />
+                    <field name="first_name" />
+                    <field name="country" />
+                    <field name="phone" />
+                    <field name="email_customer" />
+                    <field name="id_room" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue formaulaire des clients -->
+
+        <record id="customer_view_tree" model="ir.ui.view">
+            <field name="name">customer.view.form</field>
+            <field name="model">gestion_reservations.customer</field>
+            <field name="arch" type="xml">
+                <form string="Client form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="id_customer" />
+                                <field name="last_name" />
+                                <field name="first_name" />
+                            </group>
+                            <group>
+                                <field name="country" />  
+                                <field name="phone" />
+                                <field name="email_customer" />
+                            </group>
+                            
+                        </group>
+                        <!-- <notebook>
+                            <page name="name" string="Reservtaions List">
+                               <field name="reservation_id" /> 
+                            </page>
+                        </notebook> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action à effectuer sur les clients -->
+
+        <record id="customer_action" model="ir.actions.act_window">
+            <field name="name">Clients</field>
+            <field name="res_model">gestion_reservations.customer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+    
+</odoo>

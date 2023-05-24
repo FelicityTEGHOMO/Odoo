@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+            
+      <template id="template_hotels" name="Liste des hôtels">
+          <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
+          <t t-if="hotels">
+              <div>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Nom de l'hôtel</th>
+                              <th>Téléphone de l'hôtel</th>
+                              <th>Adresse de l'hôtel</th>
+                              <th>Ville de l'hôtel</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="hotels" t-as="hotel">
+                              <tr>
+                                  <td><t t-esc="hotel.name_hotel"/></td>
+                                  <td><t t-esc="hotel.tel_hotel"/></td>
+                                  <td><t t-esc="hotel.adresse_hotel"/></td>
+                                  <td><t t-esc="hotel.ville"/></td>
+                              </tr>
+                          </t>
+                      </tbody>
+                  </table>
+              </div>
+          </t>
+          <t t-if="not hotels">
+              <div>
+                  <p>Aucun hôtel à afficher pour le moment.</p>
+              </div>
+          </t>
+      </template>
+<!--       
+          <template id="listing">
+            <ul>
+              <li t-foreach="objects" t-as="object">
+                <a t-attf-href="#{ root }/objects/#{ object.id }">
+                  <t t-esc="object.display_name"/>
+                </a>
+              </li>
+            </ul>
+          </template>
+          <template id="object">
+            <h1><t t-esc="object.display_name"/></h1>
+            <dl>
+              <t t-foreach="object._fields" t-as="field">
+                <dt><t t-esc="field"/></dt>
+                <dd><t t-esc="object[field]"/></dd>
+              </t>
+            </dl>
+          </template> -->
+   
+
+
+    </data>
+</odoo>

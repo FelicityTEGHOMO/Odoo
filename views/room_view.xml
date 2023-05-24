@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="room_view_list" model="ir.ui.view">
+      <field name="name">Chambres List</field>
+      <field name="model">gestion_reservations.room</field>
+      <!-- <field name="model">tree</field> -->
+      <field name="arch" type="xml">
+        <tree string="Rooms list">
+          <field name="id_room" />
+          <field name="room_amount" />
+          <field name="room_tel" />
+          <field name="types" />
+          <field name="id_customer" />
+          <field name="id_reservation" />
+          <field name="id_hotel" />
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- Vue formulaire chambre -->
+
+    <record id="reservation_view_form" model="ir.ui.view">
+      <field name="name">room.view.form</field>
+      <field name="model">gestion_reservations.room</field>
+      <field name="arch" type="xml">
+                <form string="hotel form">
+                        <group>
+                            <group name="name" string="Infos">
+                                <field name="id_room" />
+                                <field name="room_tel" />
+                            </group>
+                            <group name="name" string="réservation">
+                                <field name="types" />
+                                <field name="room_amount" /> 
+                                <field name="Disponible" /> 
+                            </group>
+                        </group>
+                </form>
+
+
+          <!-- <header>
+              <button id="button_confirm" name="action_confirm" type="object" class="btn-primary"
+          string="Confirm" states="draft">
+              </button>
+
+              <button id="button_cancel" name="action_cancel" string="Cancel" type="object" class="btn-btn"
+          state="confirm">
+                  <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
+              </button>
+            </header> -->
+          <!-- <notebook>
+            <page name="name" string="Informations sur la réservation">
+              <field name="id_hotel">
+                <tree editable="bottom"> -->
+          <!-- <field name="id_type"/> -->
+          <!-- <field name="id_hotel" invivible="1" />
+                  <field name="id_customer"/> -->
+          <!-- <field name="reservation_num"/> -->
+          <!-- <field name="id_room"/>
+                  <field name="room_amount" string="Rent"/>
+                  <field name="start_date"/>
+                  <field name="end_date"/>
+
+                </tree>
+              </field>
+            </page>
+          </notebook> -->
+
+      </field>
+
+    </record>
+
+    <!-- Action à effectuer sur les chambres -->
+
+    <record id="room_action" model="ir.actions.act_window">
+      <field name="name">Chambres</field>
+      <field name="res_model">gestion_reservations.room</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+  </data>
+</odoo>
