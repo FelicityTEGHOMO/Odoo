@@ -77,6 +77,50 @@
               </div>
           </t>
       </template>
+
+      <!-- Template réserver -->
+
+      <template id="template_reservations" name="Liste des réservations">
+          <!-- <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/> -->
+          <t t-if="reservations">
+              <div>
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Nom</th>
+                              <th>Prénom</th>
+                              <th>Adresse e-mail</th>
+                              <th>Adresse</th>
+                              <th>Ville</th>
+                              <th>Date d'arrivée</th>
+                              <th>Date de départ</th>
+                              
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <t t-foreach="reservations" t-as="reservation">
+                              <tr>
+                                  <td><t t-esc="reservation.last_name"/></td>
+                                  <td><t t-esc="reservation.first_name"/></td>
+                                  <td><t t-esc="reservation.email"/></td>
+                                  <td><t t-esc="reservation.adresse"/></td>
+                                  <td><t t-esc="reservation.ville"/></td>
+                                  <td><t t-esc="reservation.start_date"/></td>
+                                  <td><t t-esc="reservation.end_date"/></td>
+
+
+                              </tr>
+                          </t>
+                      </tbody>
+                  </table>
+              </div>
+          </t>
+          <t t-if="not reservations">
+              <div>
+                  <p>Aucune réservation à afficher pour le moment.</p>
+              </div>
+          </t>
+        </template>
 <!--       
           <template id="listing">
             <ul>
