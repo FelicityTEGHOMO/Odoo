@@ -3,40 +3,73 @@
 
       <!-- Template hotels  -->
 
-      <template id="template_hotels" name="Liste des hôtels">
-          <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
+      <!-- <template id="template_hotels" name="Liste des hôtels">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
             <img t-att-src="'/gestions_reservations/static/img'"/>
 
-          <t t-if="hotels">
-              <div>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Nom de l'hôtel</th>
-                              <th>Téléphone de l'hôtel</th>
-                              <th>Adresse de l'hôtel</th>
-                              <th>Ville de l'hôtel</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <t t-foreach="hotels" t-as="hotel">
-                              <tr>
-                                  <td><t t-esc="hotel.name_hotel"/></td>
-                                  <td><t t-esc="hotel.tel_hotel"/></td>
-                                  <td><t t-esc="hotel.adresse_hotel"/></td>
-                                  <td><t t-esc="hotel.ville"/></td>
-                              </tr>
-                          </t>
-                      </tbody>
-                  </table>
-              </div>
-          </t>
-          <t t-if="not hotels">
-              <div>
-                  <p>Aucun hôtel à afficher pour le moment.</p>
-              </div>
-          </t>
-      </template>
+            <t t-if="hotels">
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom de l'hôtel</th>
+                                <th>Description de l'hôtel</th>
+                                <th>Téléphone de l'hôtel</th>
+                                <th>Adresse de l'hôtel</th>
+                                <th>Ville de l'hôtel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="hotels" t-as="hotel">
+                                <tr>
+                                    <td><t t-esc="hotel.name_hotel"/></td>
+                                    <td><t t-esc="hotel.description"/></td>
+                                    <td><t t-esc="hotel.tel_hotel"/></td>
+                                    <td><t t-esc="hotel.adresse_hotel"/></td>
+                                    <td><t t-esc="hotel.ville"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+            <t t-if="not hotels">
+                <div>
+                    <p>Aucun hôtel à afficher pour le moment.</p>
+                </div>
+            </t>
+        </t>
+
+
+      </template> -->
+
+    <template id="template_hotels" name="Liste des hôtels">
+        <t t-call="website.layout">
+            <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
+            <t t-foreach="hotels" t-as="hotel">
+                <div class="col-md-4">
+                    <div class="card">
+                        <!-- <img t-att-src="hotel.image_url" alt="hotel image" class="card-img-top"/> -->
+                        <div class="card-body">
+                            <h5 class="card-title" style="white-space: nowrap">Nom de l'hôtel:</h5><t t-esc="hotel.name_hotel"/>
+                            <p class="card-text">Description de l'hôtel: <t t-esc="hotel.description"/></p>
+                            <p class="card-text">Téléphone de l'hôtel: </p> <t t-esc="hotel.tel_hotel"/>
+                            <p class="card-text">Adresse de l'hôtel: <t t-esc="hotel.adresse_hotel"/></p>
+                            <p class="card-text">Ville de l'hôtel: <t t-esc="hotel.ville"/></p>
+                        </div>
+                    </div>
+                </div>
+            </t>
+            <t t-if="not hotels">
+                <div>
+                    <p>Aucun hôtel à afficher pour le moment.</p>
+                </div>
+            </t>
+        </t>
+
+    </template>
+
 
       <!-- Template chambres -->
 
@@ -81,8 +114,30 @@
       <!-- Template réserver -->
 
       <template id="template_reservations" name="Liste des réservations">
+        <record id="reservation_view_form" model="ir.ui.view">
+            <field name="name">reservation.view.form</field>
+            <field name="model">gestion_reservations.reservation</field>
+                <field name="arch" type="xml">
+                    <form string="Contact Us">
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="email" required="1"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="subject"/>
+                            <field name="message" widget="html"/>
+                        </group>
+                        <footer>
+                            <button name="send_email" string="Send"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+
+
           <!-- <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/> -->
-          <t t-if="reservations">
+          <!-- <t t-if="reservations">
               <div>
                   <table>
                       <thead>
@@ -119,7 +174,7 @@
               <div>
                   <p>Aucune réservation à afficher pour le moment.</p>
               </div>
-          </t>
+          </t> -->
         </template>
 <!--       
           <template id="listing">
