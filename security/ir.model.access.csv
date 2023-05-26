@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestion_reservations_room,gestion_reservations.room,model_gestion_reservations_room,base.group_user,1,1,1,1
+access_gestion_reservations_customer,gestion_reservations.customer,model_gestion_reservations_customer,base.group_user,1,1,1,1
+access_gestion_reservations_hotel,gestion_reservations.hotel,model_gestion_reservations_hotel,base.group_user,1,1,1,1
+access_gestion_reservations_reservation,gestion_reservations.reservation,model_gestion_reservations_reservation,base.group_user,1,1,1,1
