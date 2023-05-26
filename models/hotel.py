@@ -5,20 +5,28 @@ from odoo import models, fields, api
 class ReservationHotel(models.Model):
     _name = 'gestion_reservations.hotel'
     _description = 'hotel'
-    _rec_name = "id_hotel"
+    _rec_name = "name_hotel"
 
-    id_hotel = fields.Char(required=True, string="Numéro de l'hôtel")
+    id_hotel = fields.Integer(required=True, string="Numéro de l'hôtel")
     name_hotel = fields.Char(required=True, string="Nom de l'hôtel")
+    description = fields.Char(required=True, string="Description de l'hôtel")
     tel_hotel = fields.Char(required=True, string="Téléphone de l'hôtel")
     adresse_hotel = fields.Char(required=True, string="Adresse de l'hôtel")
     ville = fields.Char(required=True, string="Ville de l'hôtel")
-    image = fields.Binary(string='Logo')
+    image = fields.Image(string="Logo")
     # id_customer = fields.Many2many('gestion_reservations.customer', 'id_hotel', string='Customer')
     id_room = fields.One2many('gestion_reservations.room', 'id_hotel', string='Chambre')
     # room_amount = fields.Integer(required=True, string='Prix de la chambre')
     # start_date = fields.Date(required=True, string='Date d\'arrivée')
     # end_date = fields.Date(required=True, string='Date de départ')
 
+
+    # @api.model
+    # def create(self, vals):
+    #     image = vals.get('ap_logo')
+    #     if image:
+    #         vals['image'] = image 
+    #     res = super(ReservationHotel, self).create(vals)
 
 # Cette méthode retourne le nombre de chambres pour chaque hotel
 
