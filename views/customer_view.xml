@@ -9,7 +9,7 @@
             <field name="model">gestion_reservations.customer</field>
             <field name="arch" type="xml">
                 <tree string="Client list">
-                    <field name="id_customer" />
+                    <field name="id_customer" invisible='1'/>
                     <field name="last_name" />
                     <field name="first_name" />
                     <field name="country" />

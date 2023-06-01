@@ -8,15 +8,15 @@
       <!-- <field name="model">tree</field> -->
       <field name="arch" type="xml">
         <tree string="Rooms list">
-          <field name="id_room"  />
+          <field name="id_room" invisible='1' />
           <field name="room_number" />
           <field name="room_amount" />
           <field name="capacity" />
           <field name="room_tel" />
           <field name="disponible" />
           <field name="types" />
-          <field name="id_customer" />
-          <field name="id_reservation" />
+          <!-- <field name="id_customer" invisible="1" />
+          <field name="id_reservation" invisible="1" />  -->
           <field name="id_hotel" />
         </tree>
       </field>
@@ -40,7 +40,7 @@
                                 <field name="types" />
                                 <field name="capacity" />
                                 <field name="room_amount" /> 
-                                <field name="disponible" /> 
+                                <field name="disponible" />  
                             </group>
                         </group>
                 </form>

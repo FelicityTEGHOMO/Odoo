@@ -6,7 +6,7 @@ from odoo import models, fields, api
 class ReservationRoom(models.Model):
     _name = 'gestion_reservations.room'
     _description = 'room'
-    _rec_name = 'id_room'
+    _rec_name = 'room_number'
 
     # name = fields.Char(help='chambre', required=True)
     id_room = fields.Integer(required=True, string='Identifiant de chambre')

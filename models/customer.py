@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class ReservationClient(models.Model):
     _name = 'gestion_reservations.customer'
     _description = 'customer'
-    _rec_name = "id_customer"
+    _rec_name = "email_customer"
 
     id_customer = fields.Char(required=True,string="Numéro du client")
     last_name = fields.Char(required=True, string="Nom du client")

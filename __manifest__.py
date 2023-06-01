@@ -8,7 +8,7 @@
         End Users can reserve hotel rooms.
     """,
     'author': "Félicité TEGHOMO",
-    # 'website': "https://hotel-finder.fr",
+    'website': "https://hotel-finder.fr",
     'category': 'website',
     'depends': ['base','website','calendar'],
 
@@ -22,6 +22,7 @@
         'views/customer_view.xml',
         'views/reservation_view.xml',
         'views/menu.xml',
+        'views/form_view.xml',
         
     ],
     # only loaded in demonstration mode
