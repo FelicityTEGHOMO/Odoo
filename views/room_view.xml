@@ -8,17 +8,76 @@
       <!-- <field name="model">tree</field> -->
       <field name="arch" type="xml">
         <tree string="Rooms list">
-          <field name="id_room" invisible='1' />
-          <field name="room_number" />
+          <field name="id_room"  />
+          <field name="room_number" invisible = '1' />
           <field name="room_amount" />
           <field name="capacity" />
+          <field name="image" />
           <field name="room_tel" />
-          <field name="disponible" />
+          <field name="state" />
           <field name="types" />
           <!-- <field name="id_customer" invisible="1" />
           <field name="id_reservation" invisible="1" />  -->
           <field name="id_hotel" />
         </tree>
+      </field>
+    </record>
+
+    <!-- vue kanban -->
+
+    <record id="room_view_kanban" model="ir.ui.view">
+      <field name="name">room.view.kanban</field>
+      <field name="model">gestion_reservations.room</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="id_room" invisible = '1' />
+          <field name="room_number"/>
+          <field name="room_amount" />
+          <field name="capacity" />
+          <field name="image" />
+          <field name="room_tel" />
+          <field name="state" />
+          <field name="types" />
+
+          <templates>
+            <t t-name="kanban-box">
+              <div class="o_kanban_card">
+                <div class="o_kanban_card_header">
+
+                  <div class="o_kanban_card_title">
+                    <field name="room_number"/>
+                 </div>
+
+                  <div class="o_kanban_card_subtitle">
+                    <field name="room_amount"/>
+                  </div>
+
+                  <div class="o_kanban_card_subtitle">
+                    <field name="capacity"/>
+                  </div>
+
+                  <div class="o_kanban_card_subtitle">
+                    <field name="room_tel"/>
+                  </div>
+
+                  <div class="o_kanban_card_subtitle">
+                    <field name="state"/>
+                  </div>
+
+                  <div class="o_kanban_card_subtitle">
+                    <field name="types"/>
+                  </div>
+
+                </div>
+
+                <div class="o_kanban_card_footer">
+                  <button class="btn btn-primary">Réserver</button>
+                </div>
+              </div>
+
+            </t>
+          </templates>
+        </kanban>
       </field>
     </record>
 
@@ -32,16 +91,20 @@
                 <form string="hotel form">
                         <group>
                             <group name="name" string="Infos">
-                                <field name="id_room" />
+                                <field name="id_room" invisible = '1' />
                                 <field name="room_number" />
                                 <field name="room_tel" />
                             </group>
                             <group name="name" string="réservation">
                                 <field name="types" />
                                 <field name="capacity" />
+                                <field name="image" widget="image" />
                                 <field name="room_amount" /> 
-                                <field name="disponible" />  
+                                <field name="state" />  
                             </group>
+                            <!-- ajout du bouton -->
+                            <button class="btn btn-primary book_now" type="objectl" name="action_reserver_chambre" t-if="chambre.state==disponible" t-on-click="book_room(id_room)" data-room-id="{{ id_room }}"> Réserver</button>
+
                         </group>
                 </form>
 
@@ -56,23 +119,7 @@
                   <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
               </button>
             </header> -->
-          <!-- <notebook>
-            <page name="name" string="Informations sur la réservation">
-              <field name="id_hotel">
-                <tree editable="bottom"> -->
-          <!-- <field name="id_type"/> -->
-          <!-- <field name="id_hotel" invivible="1" />
-                  <field name="id_customer"/> -->
-          <!-- <field name="reservation_num"/> -->
-          <!-- <field name="id_room"/>
-                  <field name="room_amount" string="Rent"/>
-                  <field name="start_date"/>
-                  <field name="end_date"/>
-
-                </tree>
-              </field>
-            </page>
-          </notebook> -->
+  
 
       </field>
 
@@ -83,7 +130,7 @@
     <record id="room_action" model="ir.actions.act_window">
       <field name="name">Chambres</field>
       <field name="res_model">gestion_reservations.room</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,kanban</field>
     </record>
 
 
