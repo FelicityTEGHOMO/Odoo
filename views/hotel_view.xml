@@ -32,7 +32,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="id_hotel" invisible='1'/>
+                                <field name="id_hotel" />
                                 <field name="image" widget="image" />
                                 <field name="name_hotel" />
                                 <field name="description" />
