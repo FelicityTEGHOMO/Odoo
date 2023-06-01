@@ -9,20 +9,22 @@
             <field name="model">gestion_reservations.customer</field>
             <field name="arch" type="xml">
                 <tree string="Client list">
-                    <field name="id_customer" invisible='1'/>
+                    <field name="id_customer" />
                     <field name="last_name" />
                     <field name="first_name" />
                     <field name="country" />
                     <field name="phone" />
-                    <field name="email_customer" />
+                    <field name="email" />
+                    <field name="start_date" />
+                    <field name="end_date" />
                     <field name="id_room" />
                 </tree>
             </field>
         </record>
 
-        <!-- Vue formaulaire des clients -->
+        <!-- Vue formulaire des clients -->
 
-        <record id="customer_view_tree" model="ir.ui.view">
+        <record id="customer_view_form" model="ir.ui.view">
             <field name="name">customer.view.form</field>
             <field name="model">gestion_reservations.customer</field>
             <field name="arch" type="xml">
@@ -30,14 +32,14 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="id_customer" invivible="1" />
+                                <field name="id_customer" />
                                 <field name="last_name" />
                                 <field name="first_name" />
                             </group>
                             <group>
                                 <field name="country" />  
                                 <field name="phone" />
-                                <field name="email_customer" />
+                                <field name="email" />
                             </group>
                             
                         </group>
