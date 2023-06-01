@@ -1,181 +1,138 @@
 <odoo>
     <data>
 
-      <!-- Template hotels  -->
 
-      <!-- <template id="template_hotels" name="Liste des hôtels">
-        <t t-call="website.layout">
-            <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
-            <img t-att-src="'/gestions_reservations/static/img'"/>
+        <!-- Template hotel -->
 
-            <t t-if="hotels">
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nom de l'hôtel</th>
-                                <th>Description de l'hôtel</th>
-                                <th>Téléphone de l'hôtel</th>
-                                <th>Adresse de l'hôtel</th>
-                                <th>Ville de l'hôtel</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="hotels" t-as="hotel">
-                                <tr>
-                                    <td><t t-esc="hotel.name_hotel"/></td>
-                                    <td><t t-esc="hotel.description"/></td>
-                                    <td><t t-esc="hotel.tel_hotel"/></td>
-                                    <td><t t-esc="hotel.adresse_hotel"/></td>
-                                    <td><t t-esc="hotel.ville"/></td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                </div>
-            </t>
-            <t t-if="not hotels">
-                <div>
-                    <p>Aucun hôtel à afficher pour le moment.</p>
-                </div>
-            </t>
-        </t>
-
-
-      </template> -->
-
-    <template id="template_hotels" name="Liste des hôtels">
-        <t t-call="website.layout">
-            <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
-            <t t-foreach="hotels" t-as="hotel">
-                <div class="col-md-4">
-                    <div class="card">
-                        <!-- <img t-att-src="hotel.image_url" alt="hotel image" class="card-img-top"/> -->
-                        <div class="card-body">
-                            <h5 class="card-title" style="white-space: nowrap">Nom de l'hôtel:</h5><t t-esc="hotel.name_hotel"/>
-                            <p class="card-text">Description de l'hôtel: <t t-esc="hotel.description"/></p>
-                            <p class="card-text">Téléphone de l'hôtel: </p> <t t-esc="hotel.tel_hotel"/>
-                            <p class="card-text">Adresse de l'hôtel: <t t-esc="hotel.adresse_hotel"/></p>
-                            <p class="card-text">Ville de l'hôtel: <t t-esc="hotel.ville"/></p>
+        <template id="template_hotels" name="Liste des hôtels">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/gestion_reservations/static/src/css/hotel.css"/>
+                <t t-foreach="hotels" t-as="hotel">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <!-- <img t-att-src="hotel.image_url" alt="hotel image" class="card-img-top"/> -->
+                            <div class="card-body">
+                                <h5 class="card-title" style="white-space: nowrap">Nom de l'hôtel:</h5><t t-esc="hotel.name_hotel"/>
+                                <p class="card-text">Description de l'hôtel: <t t-esc="hotel.description"/></p>
+                                <p class="card-text">Téléphone de l'hôtel: </p> <t t-esc="hotel.tel_hotel"/>
+                                <p class="card-text">Adresse de l'hôtel: <t t-esc="hotel.adresse_hotel"/></p>
+                                <p class="card-text">Ville de l'hôtel: <t t-esc="hotel.ville"/></p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </t>
+                <t t-if="not hotels">
+                    <div>
+                        <p>Aucun hôtel à afficher pour le moment.</p>
+                    </div>
+                </t>
             </t>
-            <t t-if="not hotels">
-                <div>
-                    <p>Aucun hôtel à afficher pour le moment.</p>
-                </div>
-            </t>
-        </t>
 
-    </template>
-
-
-      <!-- Template chambres -->
-
-      <template id="template_chambres" name="Liste des chambres">
-          <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/>
-          <t t-if="chambres">
-              <div>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Numéro de chambre</th>
-                              <th>Prix de la chambre</th>
-                              <th>Téléphone de la chambre</th>
-                              <th>Type de la chambre</th>
-                              <th>
-                                  <t t-if="disponible">Disponible</t>
-                                  <t t-if="not disponible">Indisponible</t>
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <t t-foreach="chambres" t-as="chambre">
-                              <tr>
-                                  <td><t t-esc="chambre.room_number"/></td>
-                                  <td><t t-esc="chambre.room_amount"/></td>
-                                  <td><t t-esc="chambre.room_tel"/></td>
-                                  <td><t t-esc="chambre.types"/></td>
-                                  <td><t t-esc="chambre.disponible"/></td>
-                              </tr>
-                          </t>
-                      </tbody>
-                  </table>
-              </div>
-          </t>
-          <t t-if="not chambres">
-              <div>
-                  <p>Aucune chambre à afficher pour le moment.</p>
-              </div>
-          </t>
-      </template>
-
-      <!-- Template réserver -->
-
-      <template id="template_reservations" name="Liste des réservations">
-        <record id="reservation_view_form" model="ir.ui.view">
-            <field name="name">reservation.view.form</field>
-            <field name="model">gestion_reservations.reservation</field>
-                <field name="arch" type="xml">
-                    <form string="Contact Us">
-                        <group>
-                            <field name="name" required="1"/>
-                            <field name="email" required="1"/>
-                            <field name="phone"/>
-                        </group>
-                        <group>
-                            <field name="subject"/>
-                            <field name="message" widget="html"/>
-                        </group>
-                        <footer>
-                            <button name="send_email" string="Send"/>
-                        </footer>
-                    </form>
-                </field>
-            </record>
-
-
-          <!-- <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/> -->
-          <!-- <t t-if="reservations">
-              <div>
-                  <table>
-                      <thead>
-                          <tr>
-                              <th>Nom</th>
-                              <th>Prénom</th>
-                              <th>Adresse e-mail</th>
-                              <th>Adresse</th>
-                              <th>Ville</th>
-                              <th>Date d'arrivée</th>
-                              <th>Date de départ</th>
-                              
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <t t-foreach="reservations" t-as="reservation">
-                              <tr>
-                                  <td><t t-esc="reservation.last_name"/></td>
-                                  <td><t t-esc="reservation.first_name"/></td>
-                                  <td><t t-esc="reservation.email"/></td>
-                                  <td><t t-esc="reservation.adresse"/></td>
-                                  <td><t t-esc="reservation.ville"/></td>
-                                  <td><t t-esc="reservation.start_date"/></td>
-                                  <td><t t-esc="reservation.end_date"/></td>
-
-
-                              </tr>
-                          </t>
-                      </tbody>
-                  </table>
-              </div>
-          </t>
-          <t t-if="not reservations">
-              <div>
-                  <p>Aucune réservation à afficher pour le moment.</p>
-              </div>
-          </t> -->
         </template>
+
+
+        <!-- Template chambres -->
+
+        <template id="template_chambres" name="Liste des chambres">
+            <t t-call="website.layout">
+                <link rel="stylesheet" href="/gestion_reservations/static/src/css/chambre.css"/>
+                <t t-foreach="chambres" t-as="chambre">
+                    <div class="col-md-4 d-flex">
+                        <div class="card mb-4 box-shadow">
+                            <!-- <img t-att-src="hotel.image_url" alt="hotel image" class="card-img-top"/> -->
+                            <div class="card-body">
+                                <h5 class="card-title"> <strong>Numéro de chambre:</strong></h5><t t-esc="chambre.room_number"/>
+                                <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
+                                <p class="card-text">Téléphone de la chambre: </p> <t t-esc="chambre.room_tel"/>
+                                <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
+                                <p class="card-text">Capacité: <t t-esc="chambre.capacity"/></p>
+                                <p class="card-text">Type: <t t-esc="chambre.types"/></p>
+                                <div class="btn-group">
+                                </div>
+                                    <button class="btn btn-primary book-now" t-if="chambre.state" t-on-click="book_room(id_room)"> Réserver</button>
+                                </div>
+                                
+                        </div>
+                    </div>
+                </t>
+                <t t-if="not chambres">
+                    <div>
+                        <p>Aucune chambre à afficher pour le moment.</p>
+                    </div>
+                </t>
+            </t>
+
+        </template>
+      
+
+        <!-- template qui affiche les chambres d'un hotel -->
+
+        <template id="hotel_chambre_template" name="chambres d'un hôtel" >
+                <t t-call="website.layout">
+                    <div class="container">
+                        <h1>Chambres de l'hôtel</h1>
+                        <div class="row">
+                            <t t-foreach="chambres" t-as="chambre">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title"><t t-esc="chambre.room_number"/></h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title"> <strong>Numéro de chambre:</strong></h5><t t-esc="chambre.room_number"/>
+                                            <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
+                                            <p class="card-text">Téléphone de la chambre: </p> <t t-esc="chambre.room_tel"/>
+                                            <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
+                                            <p class="card-text">Capacité: <t t-esc="chambre.capacity"/></p>
+                                            <p class="card-text">Type: <t t-esc="chambre.types"/></p>
+                                            <div class="btn-group">
+                                            </div>
+                                                <button class="btn btn-primary book-now" t-if="chambre.state" t-on-click="book_room(id_room)"> Réserver</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+
+
+
+        </template>
+
+
+        <!-- template de details sur la chambre -->
+
+        <template id="room_details_template" name="Chambre Details">
+            <t t-call="website.layout">
+                <t t-if="room">
+                    <div class="container">
+                        <div class="card-body">
+                            <h5> <t t-esc="chambre.room_number"/> <strong>Numéro de chambre:</strong></h5>
+                            <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="room.room_amount"/> FCFA</p>
+                            <p class="card-text">Téléphone de la chambre: </p> <t t-esc="room.room_tel"/>
+                            <p class="card-text">Disponibilité: <t t-esc="room.state"/></p>
+                            <p class="card-text">Capacité: <t t-esc="room.capacity"/></p>
+                            <p class="card-text">Type: <t t-esc="room.types"/></p>
+                        
+                        </div>
+                    </div>   
+                </t>
+                <t t-if="not room">
+                    <div>
+                        <h1>Chambre non trouvée</h1>
+                        <p>La chambre demandée n'a pas pu être trouvée dans la base de données.</p>
+                    </div>
+                </t>
+
+            </t>
+        </template>
+
+
+
+    </data>
+</odoo>
+
 <!--       
           <template id="listing">
             <ul>
@@ -195,8 +152,3 @@
               </t>
             </dl>
           </template> -->
-   
-
-
-    </data>
-</odoo>
