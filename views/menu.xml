@@ -15,7 +15,7 @@
       name="Hôtels"
       action="hotel_action"
       parent="reservation_menu_root"
-      sequence="10"/>
+      sequence="4"/>
 
 
 
@@ -26,15 +26,26 @@
       name="Chambres"
       action="room_action"
       parent="reservation_menu_root"
-      sequence="12"/>
+      sequence="6"/>
 
     <!-- Menu  réserver -->
 
     <menuitem
       id="reservation_menu"
-      name="Réserver"
+      name="Réservations"
       action="reservation_action"
       parent="reservation_menu_root"
-      sequence="13"/>
+      sequence="8"/>
+
+    <!-- Menu  clients -->
+
+      <menuitem
+      id="client_menu"
+      name="Clients"
+      action="customer_action"
+      parent="reservation_menu_root"
+      sequence="9"/>
+
+      
 
 </odoo>
