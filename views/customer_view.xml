@@ -33,21 +33,15 @@
                         <group>
                             <group>
                                 <field name="id_customer" />
-                                <field name="last_name" />
+                                <field name="last_name" required="1"/>
                                 <field name="first_name" />
                             </group>
                             <group>
-                                <field name="country" />  
-                                <field name="phone" />
-                                <field name="email" />
+                                <field name="country" required="1"/>  
+                                <field name="phone" required="1" />
+                                <field name="email" required="1" />
                             </group>
-                            
                         </group>
-                        <!-- <notebook>
-                            <page name="name" string="Reservtaions List">
-                               <field name="reservation_id" /> 
-                            </page>
-                        </notebook> -->
                     </sheet>
                 </form>
             </field>
