@@ -17,7 +17,7 @@
                 <field name="phone" />
                 <field name="start_date" />
                 <field name="end_date" />
-                <!-- <field name="id_customer" /> -->
+                <field name="id_room" />
                 </tree>
             </field>
         </record>
@@ -31,23 +31,19 @@
                     <form string="reservation form">
                         <group>
                             <group name="name" string="Infos">
-                                <field name="id_reservation" />
-                                <field name="last_name" />
-                                <field name="first_name" />
-                                <field name="email" />
+                                <field name="id_reservation" invisible="1"/>
+                                <field name="id_room" required="1"/>
+                                <field name="last_name" required="1"/>
+                                <field name="first_name" required="1"/>
+                                <field name="email" required="0"/>
                             </group>
-                            <group name="name" string="Perso">
-                                <field name="country" />
-                                <field name="phone" />
-                                <field name="start_date" />
-                                <field name="end_date" />
+                            <group name="name" >
+                                <field name="phone" required="1"/>
+                                <field name="start_date" required="1"/>
+                                <field name="end_date" required="1"/>
+                                <field name="cool" invisible="1"/>
                             </group>
                         </group>
-                        <!-- <footer>
-                            <button name="action_confirm" string="Confirmer" type="object" class="btn-primary"/>
-                            <button name="action_cancel" string="Annuler" type="object" class="btn-secondary"/>
-                        </footer> -->
-
                     </form>
             </field>
 
