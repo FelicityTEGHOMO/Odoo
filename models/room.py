@@ -8,8 +8,7 @@ class ReservationRoom(models.Model):
     _description = 'room'
     _rec_name = 'room_number'
 
-    # name = fields.Char(help='chambre', required=True)
-    id_room = fields.Integer(required=True, string='Identifiant de chambre')
+    id_room = fields.Integer(required=True, string='Identifiant de chambre', unique=True)
     room_number = fields.Char(required=True, string='Numéro de chambre')
     room_amount = fields.Integer(required=True, string='Prix de la chambre')
     room_tel = fields.Char(required=True, string='Téléphone de la chambre')
@@ -26,8 +25,8 @@ class ReservationRoom(models.Model):
         ('Suite Junior', 'Suite Junior'),
         ('First Deluxe Twin', 'First Deluxe Twin')
     ], string='Type')
-    state = fields.Selection([('disponible', 'Disponible'),
-                                 ('occupied', 'Occupée')], 
+    state = fields.Selection([('Disponible', 'Disponible'),
+                                 ('Occupée', 'Occupée')], 
                                  string='Statut'
                         )
     id_hotel = fields.Many2one('gestion_reservations.hotel', required=True, string='Hôtel')
@@ -42,23 +41,3 @@ class ReservationRoom(models.Model):
             room.state = state
 
 
-
-
-    # def action_confirm(self):
-    #     self.write({'state': 'confirm'})
-    #     self.sale_order_id.write({'invoice_status': 'to invoice', 'state': 'sale'})
-
-    # def action_cancel(self):
-    #     self.state = 'cancel'
-    #     for rec in self.reservation_line_ids:
-    #         rec.room_id.write({'status': 'available'})
-
-     
-
-
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
