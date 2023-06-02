@@ -17,7 +17,6 @@
                     <field name="adresse_hotel" />
                     <field name="ville" />
                     <field name="id_room" />
-                    <!-- <field name="hotel_room_count" /> -->
                 </tree>
             </field>
         </record>
@@ -34,6 +33,32 @@
                             <group>
                                 <field name="id_hotel" />
                                 <field name="image" widget="image" />
+                                <field name="name_hotel" required="1"/>
+                                <field name="description" required="1" />
+                                <field name="adresse_hotel" required="1"/>  
+                                <field name="tel_hotel" required="1" />
+                                <field name="ville" required="1" />
+                            </group>
+                            <group>
+                                <field name="id_room" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ajouté -->
+        <record id="hotel_view_object" model="ir.ui.view">
+            <field name="name">hotel.view.object</field>
+            <field name="model">gestion_reservations.hotel</field>
+            <field name="arch" type="xml">
+                <form string="hotel object">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="id_hotel" />
+                                <field name="image" widget="image" />
                                 <field name="name_hotel" />
                                 <field name="description" />
                                 <field name="adresse_hotel" />  
@@ -44,8 +69,6 @@
                                 <field name="id_room" />
                             </group>
                         </group>
-
-                            
                     </sheet>
                 </form>
             </field>
