@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import http, _
 from odoo.http import request
-from datetime import datetime
-from odoo.exceptions import ValidationError
+
 
 # controller hotel
 
@@ -13,11 +12,13 @@ class HotelController(http.Controller):
         return http.request.render('gestion_reservations.template_hotels', {'hotels': hotels})
 
     # route nouvellement créée et qui ne marche pas
-    @http.route('/hotel/<int:id_hotel>/chambres/<int:id_room>', website=True, type='http', auth="public")
-    def hotel_chambres(self, id_hotel, id_room, **kwargs):
+    @http.route('/hotel/chambres', website=True, type='http', auth="public")
+    def hotel_chambres(self, id_hotel,**kw):
+         # nom de l'input qui récupère l'id de l'hotel
+        print(id_hotel)
         hotel = request.env['gestion_reservations.hotel'].sudo().browse(id_hotel)
-        chambres = request.env['gestion_reservations.room'].sudo().browse(id_room)
-        return http.request.render('gestion_reservations.hotel_chambre_template', {'hotel': hotel, 'chambres': chambres})
+        rooms = request.env['gestion_reservations.room'].filter(lambda room: room.id_hotel.id == id_hotel)
+        return http.request.render('gestion_reservations.hotel_chambre_template', {'hotel': hotel, 'rooms': rooms})
 
 
 # controller chambre
@@ -31,9 +32,10 @@ class ChambreController(http.Controller):
 class ReserverController(http.Controller):
     @http.route('/reserver', type="http", auth='public', website=True, csrf=False) #Ajout des informations liées à room
     def reserver_webform(self, **kw):
-        id = kw['room_reserve']
+        id = kw['room_reserve'] # nom de l'input qui récupère l'id de la chambre
         print(id)
         chambre = request.env['gestion_reservations.room'].sudo().browse(int(id))
+        
         return http.request.render('gestion_reservations.Reserver', {'chambre': chambre}) #Template
 
     @http.route('/create/reservation', type="http", auth='public', website=True) #Action de reservation
@@ -58,9 +60,10 @@ class ReserverController(http.Controller):
         # Logique pour charger la route
         # ...
         return request.redirect('/gestion_reservations/reserver')
-#     @http.route('/gestion_reservation/gestion_reservation/objects/<model("gestion_reservation.gestion_reservation"):obj>', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('gestion_reservation.object', {
-#             'object': obj
-#         })
+@http.route('/gestion_reservation/gestion_reservation/hotels/<model("gestion_reservation.hotel"):obj>', auth='public')
+def object(self, obj, **kw):
+        hotels = http.request.env['gestion_reservations.hotel'].search([])
+        return http.request.render('gestion_reservations.hotel.object', {
+            'object': obj, 'hotels' : hotels
+        })
 
