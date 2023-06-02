@@ -8,8 +8,8 @@
       <!-- <field name="model">tree</field> -->
       <field name="arch" type="xml">
         <tree string="Rooms list">
-          <field name="id_room"  />
-          <field name="room_number" invisible = '1' />
+          <field name="id_room" invisible = '1' />
+          <field name="room_number" />
           <field name="room_amount" />
           <field name="capacity" />
           <field name="image" />
@@ -102,25 +102,8 @@
                                 <field name="room_amount" /> 
                                 <field name="state" />  
                             </group>
-                            <!-- ajout du bouton -->
-                            <button class="btn btn-primary book_now" type="objectl" name="action_reserver_chambre" t-if="chambre.state==disponible" t-on-click="book_room(id_room)" data-room-id="{{ id_room }}"> Réserver</button>
-
                         </group>
                 </form>
-
-
-          <!-- <header>
-              <button id="button_confirm" name="action_confirm" type="object" class="btn-primary"
-          string="Confirm" states="draft">
-              </button>
-
-              <button id="button_cancel" name="action_cancel" string="Cancel" type="object" class="btn-btn"
-          state="confirm">
-                  <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
-              </button>
-            </header> -->
-  
-
       </field>
 
     </record>
