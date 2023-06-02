@@ -39,12 +39,12 @@
 
     <!-- Menu  clients -->
 
-      <menuitem
+      <!-- <menuitem
       id="client_menu"
       name="Clients"
       action="customer_action"
       parent="reservation_menu_root"
-      sequence="9"/>
+      sequence="9"/> -->
 
       
 
