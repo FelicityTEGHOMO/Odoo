@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class ReservationRoom(models.Model):
@@ -26,7 +26,7 @@ class ReservationRoom(models.Model):
         ('First Deluxe Twin', 'First Deluxe Twin')
     ], string='Type')
     state = fields.Selection([('Disponible', 'Disponible'),
-                                 ('Occupée', 'Occupée')], 
+                                 ('occupied', 'Occupée')], 
                                  string='Statut'
                         )
     id_hotel = fields.Many2one('gestion_reservations.hotel', required=True, string='Hôtel')
@@ -34,10 +34,15 @@ class ReservationRoom(models.Model):
     id_customer = fields.Many2one('gestion_reservations.customer', string='Client')
 
 
-    def set_room_state(self, id_room, state):
-        room = self.browse(id_room)
+    """ @api.onchange('id_hotel')
+    def _check_room(self):
+        if self.id_hotel:
+            self.state='occupied' """
+
+    # def set_room_state(self, id_room, state):
+    #     room = self.browse(id_room)
         #  la méthode browse est utilisée pour récupérer l'enregistrement d'une chambre correspondant à un identifiant
-        if room:
-            room.state = state
+        # if room:
+        #     room.state = state
 
 
