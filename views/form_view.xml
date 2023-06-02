@@ -7,7 +7,6 @@
         <field name="name">Réserver</field>
         <field name="url">/reserver</field>
         <field name="parent_id" ref="website.main_menu"/>
-        <!-- <field name="sequence">55</field> -->
     </record>
 
     <template id="Reserver" name="Reserver">
@@ -17,7 +16,7 @@
                     <div class="col-md-6">
                         <form role="form" action="/create/reservation" method="POST">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                            <h2>Réserver</h2>
+                            <h2>Guest informations</h2>
                             <div class="form-group">
                                 <label for="last_name" class="control-label">Nom</label>
                                 <input type="text" name="last_name" t-att-value="last_name" id="last_name" class="form-control" required="required"/>
@@ -40,7 +39,7 @@
 
                             <div class="form-group">
                                 <label for="email" class="control-label">Email</label>
-                                <input type="email" name="email" t-att-value="email" id="email" class="form-control" required="required"/>
+                                <input type="email" name="email" t-att-value="email" id="email" class="form-control"/>
                             </div>
 
                             <div class="form-group">
@@ -54,31 +53,30 @@
                             </div>
 
                             <div class="clearfix oe_login_buttons">
-                                <button type="submit" name="" class="btn btn-primary pull-left">Réserver</button>
+                                <button type="submit" class="btn btn-primary pull-left">Réserver</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="col-md-6">
-                            <t t-foreach="chambres" t-as="chambre">
-                                 <h1>Informations sur la chambre</h1>
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="card-title"><t t-esc="chambre.room_number"/></h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title"> <strong>Numéro de chambre:</strong></h5><t t-esc="chambre.room_number"/>
-                                            <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
-                                            <p class="card-text">Téléphone de la chambre: </p> <t t-esc="chambre.room_tel"/>
-                                            <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
-                                            <p class="card-text">Capacité: <t t-esc="chambre.capacity"/></p>
-                                            <p class="card-text">Type: <t t-esc="chambre.types"/></p>
-                                            <div class="btn-group">
+                        <div class="container">
+                            <form action="/reserver" method="POST">
+                                <h1>Informations sur la chambre</h1>
+                                <div class="row">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"> <strong>Numéro de chambre:</strong><t t-esc="chambre.room_number"/> </h5>
+                                                    <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
+                                                    <p class="card-text">Téléphone de la chambre:  <t t-esc="chambre.room_tel"/></p>
+                                                    <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
+                                                    <p class="card-text">Capacité: <t t-esc="chambre.capacity"/></p>
+                                                    <p class="card-text">Type: <t t-esc="chambre.types"/></p>
+                                                    <!-- t-esc est utilisée pour afficher des données dynamiques sur le site web -->
+                                                </div>
                                             </div>
-                                                <button class="btn btn-primary book-now" t-if="chambre.state" t-on-click="book_room(id_room)"> Réserver</button>
-                                        </div>
-                                    </div>
-                            </t>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,122 +111,3 @@
     </record>
 
 </odoo>
-
-<!-- Façon de faire un template -->
-  <!-- <div class="container mb64" id="s2u_online_appointment">
-                   <div class="row">
-                       <div class="col-sm-12">
-                           <form t-att-action="form_action"  method="post" class="form-horizontal mt32" enctype="multipart/form-data">
-                               <input type="hidden" name="form_criteria" id="form_criteria" t-att-value="form_criteria"/>
-                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                               <div class="row">
-                                   <div class="col-lg-12">
-                                       <div t-if="error_message" class="alert alert-danger" role="alert">
-                                           <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
-                                       </div>
-                                   </div>
-                                   <t t-if="mode == 'registered'">
-                                       <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Your Name</label>
-                                           <div>
-                                               <input type="text" class="form-control" readonly="True" name="name" t-att-value="name"/>
-                                           </div>
-                                       </div>
-                                       <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Your Email</label>
-                                           <div>
-                                               <input type="text" class="form-control" name="email" readonly="True" t-att-value="email"/>
-                                           </div>
-                                       </div>
-                                       <div class="form-group col-xl-6">
-                                           <label class="control-label" for="name">Your Phone</label>
-                                           <div>
-                                               <input type="text" class="form-control" name="phone" readonly="True" t-att-value="phone"/>
-                                           </div>
-                                       </div>
-                                   </t>
-                                   <t t-else="">
-                                       <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="name">Your Name</label>
-                                           <div>
-                                               <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name" required="True" />
-                                           </div>
-                                       </div>
-                                       <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="email">Your Email</label>
-                                           <div>
-                                               <input type="text" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email" required="True" />
-                                           </div>
-                                       </div>
-                                       <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
-                                           <label class="control-label" for="phone">Your Phone</label>
-                                           <div>
-                                               <input type="text" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone" required="True" />
-                                           </div>
-                                       </div>
-                                   </t>
-                                   <div class="form-group col-xl-6"></div>
-                                   <div class="form-group col-xl-6">
-                                       <label class="control-label" for="appointment_option">Subject</label>
-                                       <div>
-                                           <select id="appointment_option_id" required="True" name="appointment_option_id" class="form-control">
-                                               <option value="">Select</option>
-                                               <t t-foreach="appointment_options" t-as="ao">
-                                                   <option t-att-value="ao.id" t-att-selected="ao.id == appointment_option_id">
-                                                       <t t-esc="ao.name" />
-                                                   </option>
-                                               </t>
-                                           </select>
-                                       </div>
-                                   </div>
-                                   <div class="form-group col-xl-6">
-                                       <label class="control-label" for="appointee_id">With</label>
-                                       <div>
-                                           <select id="appointee_id" required="True" name="appointee_id" class="form-control">
-                                               <option value="">Select</option>
-                                               <t t-foreach="appointees" t-as="o">
-                                                   <option t-att-value="o.id" t-att-selected="o.id == appointee_id">
-                                                       <t t-esc="o.name" />
-                                                   </option>
-                                               </t>
-                                           </select>
-                                       </div>
-                                   </div>
-                                   <div t-attf-class="form-group #{error and 'appointment_date' in error and 'has-error' or ''} col-xl-6">
-                                       <label class="control-label" for="appointment_date">Appointment Date</label>
-                                       <div>
-                                           <div class='input-group date'>
-                                               <input id ="appointment_date" name="appointment_date"  class="form-control datepicker" required="True" placeholder="dd/mm/yyyy" t-att-value="appointment_date"/>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group col-xl-6">
-                                       <label class="control-label" for="timeslot_id">Timeslot</label>
-                                       <div>
-                                           <select id="timeslot_id" required="True" name="timeslot_id" class="form-control">
-                                               <option value="">Select</option>
-                                               <t t-foreach="timeslots" t-as="t">
-                                                   <option t-att-value="t['id']" t-att-selected="t['id'] == timeslot_id">
-                                                       <t t-esc="t['timeslot']" />
-                                                   </option>
-                                               </t>
-                                           </select>
-                                       </div>
-                                   </div>
-                                   <div class="form-group col-lg-12">
-                                       <label class="control-label" for="remarks">Remarks</label>
-                                       <div>
-                                           <textarea class="form-control" cols="60" name="remarks" rows="6"><t t-esc="remarks"/></textarea>
-                                       </div>
-                                   </div>
-
-                                   <div class="form-group col-lg-12">
-                                       <div>
-                                           <button class="btn btn-success">Submit</button>
-                                       </div>
-                                   </div>
-                               </div>
-                           </form>
-                       </div>
-                   </div>
-                </div> -->
