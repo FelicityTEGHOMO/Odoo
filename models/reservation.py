@@ -7,7 +7,7 @@ class Reservation(models.Model):
     _description = 'reservation'
     _rec_name = "email"
 
-    id_reservation = fields.Char(string="Numéro de la réservation")
+    id_reservation = fields.Char(string="Numéro de la réservation", unique=True)
     last_name = fields.Char(string="Nom")
     first_name = fields.Char(string="Prénom")
     email = fields.Char(string="Adresse e-mail")
