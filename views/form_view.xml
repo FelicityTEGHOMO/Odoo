@@ -17,6 +17,12 @@
                         <form role="form" action="/create/reservation" method="POST">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             <h2>Guest informations</h2>
+
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="last_name" class="control-label">Nom</label> -->
+                                <!-- <input type="hidden" name="room_number" t-att-value="room_number" id="room_number" class="form-control" />
+                            </div> -->
+
                             <div class="form-group">
                                 <label for="last_name" class="control-label">Nom</label>
                                 <input type="text" name="last_name" t-att-value="last_name" id="last_name" class="form-control" required="required"/>
@@ -51,6 +57,15 @@
                                 <label for="end_date" class="control-label">Date de départ</label>
                                 <input type="date" name="end_date" t-att-value="end_date" id="end_date" class="form-control" required="required"/>
                             </div>
+                            <div class="form-group">
+                                  <label for="cancellation-policy">Politique d'annulation:</label>
+                                    <select id="cancellation-policy" name="cancellation-policy">
+                                        <option value="non_cancellable">Non-annulable</option>
+                                        <option value="free_cancellation">Annulation gratuite jusqu'à 24 heures avant l'enregistrement</option>
+                                        <option value="50_percent_charge">50% de frais si annulé dans les 24 heures avant l'enregistrement</option>
+                                        <option value="full_charge">Frais de 100% si annulé dans les 24 heures avant l'enregistrement</option>
+                                    </select>
+                            </div>
 
                             <div class="clearfix oe_login_buttons">
                                 <button type="submit" class="btn btn-primary pull-left">Réserver</button>
@@ -64,14 +79,24 @@
                                 <h1>Informations sur la chambre</h1>
                                 <div class="row">
                                             <div class="card">
+                                            <t t-call="website.layout">
+                                                <t t-set="room_number" t-value="room_number"/>
+                                                <t t-set="room_amount" t-value="room_amount"/>
+                                                <t t-set="room_tel" t-value="room_tel"/>
+                                                <t t-set="state" t-value="state"/>
+                                                <t t-set="capacity" t-value="capacity"/>
+                                                <t t-set="types" t-value="types"/>
+                                            </t>
+                                                <!-- t-esc est utilisée pour afficher des données dynamiques sur le site web -->
+
                                                 <div class="card-body">
+                                                    <input type="hidden" name="id_room" t-att-value="id_room"/>
                                                     <h5 class="card-title"> <strong>Numéro de chambre:</strong><t t-esc="chambre.room_number"/> </h5>
                                                     <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
                                                     <p class="card-text">Téléphone de la chambre:  <t t-esc="chambre.room_tel"/></p>
                                                     <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
                                                     <p class="card-text">Capacité: <t t-esc="chambre.capacity"/></p>
                                                     <p class="card-text">Type: <t t-esc="chambre.types"/></p>
-                                                    <!-- t-esc est utilisée pour afficher des données dynamiques sur le site web -->
                                                 </div>
                                             </div>
                                 </div>

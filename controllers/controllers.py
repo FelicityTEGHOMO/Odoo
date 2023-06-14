@@ -31,18 +31,38 @@ class ChambreController(http.Controller):
 # controller réserver
 class ReserverController(http.Controller):
     @http.route('/reserver', type="http", auth='public', website=True, csrf=False) #Ajout des informations liées à room
-    def reserver_webform(self, **kw):
+    def reserver_webform(self,  **kw):
         id = kw['room_reserve'] # nom de l'input qui récupère l'id de la chambre
         print(id)
         chambre = request.env['gestion_reservations.room'].sudo().browse(int(id))
-        
-        return http.request.render('gestion_reservations.Reserver', {'chambre': chambre}) #Template
+        if not chambre.exists():
+            raise NOT_FOUND()
+
+        room_number = chambre.room_number,
+        idd_room = id,
+        room_amount = chambre.room_amount,
+        room_tel = chambre.room_tel,
+        state = chambre.state,
+        capacity = chambre.capacity,
+        types = chambre.types
+
+        return request.render('gestion_reservations.Reserver', {
+            'idd_room': idd_room,
+            'room_number': room_number,
+            'room_amount': room_amount,
+            'room_tel': room_tel,
+            'state': state,
+            'capacity': capacity,
+            'types':types,
+            'chambre': chambre
+        }) #Template
 
     @http.route('/create/reservation', type="http", auth='public', website=True) #Action de reservation
     def create_reservation(self,**kw):
         print("hey....................................", kw)
         # request.env['gestion_reservations.customer'].sudo().create(kw)
         reservation_val={
+            # 'room_number':kw.get('room_number'),
             'last_name':kw.get('last_name'),
             'first_name': kw.get('first_name'),
             'country':kw.get('country'),

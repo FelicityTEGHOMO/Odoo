@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError, ValidationError
 
 
 class ReservationRoom(models.Model):
@@ -32,6 +33,8 @@ class ReservationRoom(models.Model):
     id_hotel = fields.Many2one('gestion_reservations.hotel', required=True, string='Hôtel')
     id_reservation = fields.Many2one('gestion_reservations.reservation', string='Réservation') # j'ai remplacé many2one par One2many
     id_customer = fields.Many2one('gestion_reservations.customer', string='Client')
+    max_occupancy = fields.Integer(string='Maximum de personnes')
+
 
 
     """ @api.onchange('id_hotel')
@@ -39,10 +42,10 @@ class ReservationRoom(models.Model):
         if self.id_hotel:
             self.state='occupied' """
 
-    # def set_room_state(self, id_room, state):
-    #     room = self.browse(id_room)
-        #  la méthode browse est utilisée pour récupérer l'enregistrement d'une chambre correspondant à un identifiant
-        # if room:
-        #     room.state = state
+# Méthode qui gère le nombre d'occupants d'une chambre
 
-
+    @api.constrains('max_occupancy', 'capacity')
+    def _check_max_occupancy(self):
+        for room in self:
+            if room.max_occupancy and room.max_occupancy > room.capacity:
+                raise ValidationError('Le nombre maximal de personnes ne peut pas dépasser la capacité de la chambre.')

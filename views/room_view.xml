@@ -8,7 +8,7 @@
       <!-- <field name="model">tree</field> -->
       <field name="arch" type="xml">
         <tree string="Rooms list">
-          <field name="id_room" invisible = '1' />
+          <field name="id_room" invisible="1" />
           <field name="room_number" />
           <field name="room_amount" />
           <field name="capacity" />

@@ -59,6 +59,7 @@
                                             <!-- <img t-att-src="hotel.image_url" alt="hotel image" class="card-img-top"/> -->
                                             <div class="card-body">
                                                 <input type="hidden" name="room_reserve" t-att-value="chambre.id"/>
+                                                <input type="hidden" name="room_reserve" t-att-value="chambre.room_number"/>
                                                 <h5 class="card-title"> <strong>Numéro de chambre:</strong></h5><t t-esc="chambre.room_number"/>
                                                 <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
                                                 <p class="card-text">Téléphone de la chambre: </p> <t t-esc="chambre.room_tel"/>
@@ -103,8 +104,8 @@
                                                 <h4 class="card-title"><t t-esc="chambre.room_number"/></h4>
                                             </div>
                                             <div class="card-body">
-                                                <input type="hidden" name="hotel_rooms" t-att-value="id_hotel"/>
-                                                <h5 class="card-title"> <strong>Numéro de chambre:</strong><t t-esc="chambre.room_number"/> </h5>
+                                                <input type="hidden" name="id_room" t-att-value="id_room"/>
+                                                <!-- <h5 class="card-title"> <strong>Numéro de chambre:</strong><t t-esc="chambre.room_number"/> </h5> -->
                                                 <p class="card-text d-flex justify-content-between align-items-center">Prix de la chambre: <t t-esc="chambre.room_amount"/> FCFA</p>
                                                 <p class="card-text">Téléphone de la chambre:  <t t-esc="chambre.room_tel"/></p>
                                                 <p class="card-text">Disponibilité: <t t-esc="chambre.state"/></p>
