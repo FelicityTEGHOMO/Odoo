@@ -4,16 +4,17 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError, ValidationError
 from datetime import datetime
 from datetime import timedelta
+import re
 
 class Reservation(models.Model):
     _name = 'gestion_reservations.reservation'
     _description = 'reservation'
-    _rec_name = "email"
+    _rec_name = 'email'
 
     id_reservation = fields.Char(string="Numéro de la réservation", unique=True)
     last_name = fields.Char(string="Nom")
     first_name = fields.Char(string="Prénom")
-    email = fields.Char(string="Adresse e-mail")
+    email = fields.Char(required=True, string="Adresse e-mail")
     country = fields.Char(string="Pays du client")
     phone = fields.Char( string="Téléphone du client")
     start_date = fields.Date(string='Date d\'arrivée')
@@ -80,5 +81,32 @@ class Reservation(models.Model):
             return True
 
 
+# Condition sur le numéro de téléphone
 
+    @api.constrains('phone')
+    def check_phone(self):
+        motif = r"^6[5|6|7|8|9][0-9]{7}$"
+        if not re.match(motif, self.phone):
+            raise ValidationError("Numéro de téléphone incorrect")
 
+# Statut de la chambre quand une réservation est supprimée
+
+    @api.model
+    def change_state_room(self):
+        for reservation in self:
+            room = reservation.id_room
+            room.state = 'Disponible'
+            return super().change_state_room()
+            # if reservation.id_room:
+            #     reservation.id_room.state = "Disponible"
+        # return super(Reservation, self).change_state_room()
+
+        # book = self.env['gestion_reservations.reservation'].search([('id', '=', 'id_reservation ')])
+        # book.change_state_room()
+        
+
+    # @api.model
+    # def unlink(self):
+    #     for record in self:
+    #         record.id_room.state = 'Disponible'
+    #     return super().unlink()       
