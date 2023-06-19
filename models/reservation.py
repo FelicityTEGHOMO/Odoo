@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import UserError, ValidationError
+from datetime import datetime
+from datetime import timedelta
 
 class Reservation(models.Model):
     _name = 'gestion_reservations.reservation'
@@ -19,10 +21,10 @@ class Reservation(models.Model):
     id_customer = fields.Many2one('gestion_reservations.customer', string='Client')
     id_room = fields.Many2one('gestion_reservations.room', string='Chambre')
     cool= fields.Boolean()
-    stay_duration = fields.Integer(string="Durée du séjour", compute="_get_stay_duration")
+    # stay_duration = fields.Integer(string="Durée du séjour", compute="_get_stay_duration")
     total_price = fields.Float(compute='_compute_total_price', string="Total à payer" ,store=True)
     cancellation_policy = fields.Selection([
-        ('non_cancellable', 'Non-Cancellable'),
+        ('non_cancellable', 'Impossible d\'annuler'),
         ('free_cancellation', 'Annulation gratuite jusqu\'à 24 heures avant l\'enregistrement'),
         ('50_percent_charge', '50% de frais si annulé dans les 24 heures avant l\'enregistrement'),
         ('full_charge', 'Frais de 100% si annulé dans les 24 heures avant l\'enregistrement')
@@ -51,7 +53,7 @@ class Reservation(models.Model):
             if reservation.start_date > reservation.end_date:
                 raise ValidationError("La date d'arrivée ne peut pas être supérieure à la date de départ.")
 
-# Méthode pour calculer le nombre de jours de séjour
+# Méthode pour calculer le nombre de jours et le montant à payer
 
 
     @api.depends('start_date', 'end_date', 'id_room.room_amount')
@@ -79,11 +81,4 @@ class Reservation(models.Model):
 
 
 
-#récupération des chambres disponibles dans une période spécifiée
 
-    # @api.multi
-    # def get_available_rooms(self, start_date, end_date):
-    #     domain = [('start_date', '<=', start_date), ('end_date', '>=', end_date), ('state', 'not in', ['occupied'])]
-    #     occupied_rooms = self.search(domain).mapped('id_room')
-    #     available_rooms = self.env['gestion_reservations.room'].search([('id', 'not in', occupied_rooms.ids)])
-    #     return available_rooms
